@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "Resource.h"
+#include "../include/Resource.h"
 
 using namespace std;
 

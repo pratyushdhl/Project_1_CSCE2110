@@ -1,8 +1,8 @@
 #ifndef RESERVATIONMANAGER_H
 #define RESERVATIONMANAGER_H
 
-#include "Reservation.h"
-#include "ResourceManager.h"
+#include "../include/Reservation.h"
+#include "../include/ResourceManager.h"
 
 using namespace std;
 
@@ -19,6 +19,7 @@ class ReservationManager
 {
 private:
     ReservationNode* head;
+	ReservationNode* tail;
     ResourceManager* resourceManager;
 
 public:
