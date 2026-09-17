@@ -2,7 +2,8 @@
 *.exe
 *.out
 *.app
-*.o*.obj
+*.o
+*.obj
 
 # Build Directories
 bin/
