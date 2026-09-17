@@ -1,8 +1,11 @@
 # Project_1_CSCE2110
 This is the Git repository for the 1st project of Data Structure and Algorithm. The project is a system of Campus Resource Reservation.
 
-## Time & Space Complexity Analysis
-
+## Data Structures Used
+* **`std::vector<Resource>`**: Stores resource inventory for fast traversal and sorting algorithms.
+* **Singly Linked List**: Stores active reservations dynamically with efficient dynamic insertions/deletions.
+* **Queue (FIFO)**: Tracks student waiting lists when resources are currently unavailable.
+* **Stack (LIFO)**: Maintains cancellation history to support undo functionality.
 
 
 ## File & Folder Organization
