@@ -1,7 +1,15 @@
-#include "Reservation.h"
+#include "../include/Reservation.h"
 #include <iostream>
 
 using namespace std;
+
+Reservation :: Reservation () {
+	reservationID = "";
+    studentID = "";
+    resourceID = "";
+    date = "";
+    time = "";
+}
 
 Reservation :: Reservation (string rID, string sID, string resID, string d, string t)
 {

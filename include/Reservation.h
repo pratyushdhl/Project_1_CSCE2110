@@ -15,6 +15,7 @@ private:
     string time;
 
 public:
+	Reservation();
     Reservation(string rID, string sID, string resID,
                 string d, string t);
 
