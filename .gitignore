@@ -1,1 +1,28 @@
+# Compiled Binaries & Executables
+*.exe
+*.out
+*.app
+*.o*.obj
 
+# Build Directories
+bin/
+build/
+dist/
+
+# IDE & Editor Specific Files (macOS, VS Code, CLion, Visual Studio)
+.vscode/
+.idea/
+*.swp
+*.swo
+*.user
+*.suo
+*.sln
+*.vcxproj*
+
+# Operating System Metadata
+.DS_Store
+Thumbs.db
+
+# Temporary Files & Logs
+*.tmp
+*.log
