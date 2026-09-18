@@ -1,5 +1,6 @@
 #include "../include/ResourceManager.h"
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 
@@ -38,7 +39,7 @@ bool ResourceManager::loadResources(const string& filename)
 
         bool isAvailable;
 
-        if (availability == "1")
+        if (availability == "Available")
         {
             isAvailable = true;
         }
@@ -68,20 +69,24 @@ void ResourceManager::displayResources() const
 
 void ResourceManager::displayResourceAvailability() const
 {
+	// Table header
     cout << "\n===== Resource Availability =====" << endl;
-
-    for (const Resource& resource : resources)
-    {
-        cout << "Resource ID: " << resource.getResourceID()
-             << " | ";
-         if (resource.isAvailable())
-        {
-            cout << "Available";
-        }
-        else
-        {
-            cout << "Unavailable";
-        }
-        cout << endl;
-    }
+	cout << setw(5) << left << "ID";
+	cout << "|" << setw(25) << "Name";
+	cout << "|" << setw(25) << "Type";
+	cout << "|Availability" << endl;
+	cout << string(5, '-') << '+';
+	cout << string(25, '-') << '+';
+	cout << string(25, '-') << '+';
+	cout << string(15, '-') << endl;
+	
+	// Table contents
+	for (const Resource& resource : resources) {
+		cout << setw(5) << resource.getResourceID();
+		cout << "|" << setw(25) << resource.getResourceName();
+		cout << "|" << setw(25) << resource.getResourceType();
+		cout << "|";
+		cout << (resource.isAvailable() ? "Available" : "Unavailable") << endl;
+	}
+	cout << endl;
 }
