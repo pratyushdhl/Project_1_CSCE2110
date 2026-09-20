@@ -95,7 +95,10 @@ int main() {
                 string reservationID;
                 cout << "Search by Reservation ID: ";
                 cin >> reservationID;
-                reservationManager.searchReservationByID(reservationID);
+				Reservation* res = reservationManager.searchReservationByID(reservationID);
+				if (res != nullptr) {
+					(*res).display();
+				}
                 break;
             }
 
@@ -110,7 +113,6 @@ int main() {
             // Handle choices: Generate Report (8)
             case 8:
             {
-                resourceManager.generateReport();
                 reservationManager.generateReport();
                 reservationManager.displayActiveReservations();
                 break;

@@ -1,4 +1,5 @@
 #include "../include/ReservationManager.h"
+#include <iostream>
 
 using namespace std;
 
@@ -65,6 +66,25 @@ bool ReservationManager::createReservation(
 	
 }
 
+// Search reservation by ID
+
+Reservation* ReservationManager::searchReservationByID(const string& reservationID) {
+	
+	// Traverse linearly until found or end
+	ReservationNode* curr = head;
+	
+	while (curr != nullptr) {
+		if (curr->reservation.getReservationID() == reservationID) {
+			// Clone reservation and add to cancel stack
+			return &(curr->reservation);
+		}
+		curr = curr->next;
+	}
+	// Not found
+	return nullptr;
+	
+}
+
 // Remove reservation by ID
 
 bool ReservationManager::cancelReservation(const string& reservationID) {
@@ -103,7 +123,7 @@ bool ReservationManager::undoCancellation() {
 	
 	// Create node
 	Reservation res = cancellations.top();
-	ReservationNode* newNode = new ReservationNode(*res);
+	ReservationNode* newNode = new ReservationNode(res);
 		
 	// Empty list case
 	if (head == nullptr) {
@@ -139,5 +159,11 @@ void ReservationManager::displayActiveReservations() const {
 		curr->reservation.display();
 		curr = curr->next;
 	}
+	
+}
+
+void ReservationManager::generateReport() const {
+	
+	cout << "Placeholder for report" << endl;
 	
 }

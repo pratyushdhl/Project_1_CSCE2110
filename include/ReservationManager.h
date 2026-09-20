@@ -43,12 +43,15 @@ public:
         const string& date,
         const string& time
     );
+	
+	Reservation* searchReservationByID(const string& reservationID);
 
     bool cancelReservation(const string& reservationID);
 	bool undoCancellation();
 
 	void displayWaitingList() const;
     void displayActiveReservations() const;
+	void generateReport() const;
 };
 
 #endif

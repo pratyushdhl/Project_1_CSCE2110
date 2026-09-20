@@ -56,6 +56,48 @@ bool ResourceManager::loadResources(const string& filename)
     file.close();
 }
 
+void ResourceManager::sortResourcesByName() {
+	
+	if (resources.empty()) {
+		cout << "No resources to sort." << endl;
+	}
+	else {
+		/* SWITCHING TO BUBBLE SORT FOR SIMPLICITY
+		// Quick sort by resource name
+		Resource& pivot = resources.back();
+		int i = -1;
+		for (int j = 0; j < resources.size() - 2; j++) {
+			// Compare jth and pivot
+			if (resources[j].getResourceName() < pivot.getResourceName()) {
+				i++;
+				if (i != j) {
+					// Swap ith and jth
+					Resource temp = resources[j];
+					resources[j] = resources[i];
+					resources[i] = temp;
+				}
+			}
+		}
+		// Move pivot to i+1
+		resources.insert(resources.begin() + i+1, resources.back());
+		resources.pop_back();
+		*/
+		bool sorted = false;
+		while (!sorted) {
+			sorted = true;
+			for (int i = 1; i < resources.size(); i++) {
+				// Compare ith to previous
+				if (resources[i].getResourceName() < resources[i-1].getResourceName()) {
+					Resource temp = resources[i-1];
+					resources[i-1] = resources[i];
+					resources[i] = temp;
+					sorted = false;
+				}
+			}
+		}
+	}	
+}
+
 void ResourceManager::displayResources() const
 {
     cout << "\n===== All Resources =====" << endl;
