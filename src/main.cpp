@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "../include/ReservationManager.h"
 using namespace std;
 
@@ -114,7 +115,6 @@ int main() {
             case 8:
             {
                 reservationManager.generateReport();
-                reservationManager.displayActiveReservations();
                 break;
             }
 
@@ -131,7 +131,6 @@ int main() {
                 break;
             }
         }
-	
   }
   
   return 0;
