@@ -16,6 +16,9 @@ class ResourceManager
         // Load resource from resources.txt
         bool loadResources(const string& filename);
 
+		// Sort resources by name
+		void sortResourcesByName();
+
         //Display all resources
         void displayResources() const;
 

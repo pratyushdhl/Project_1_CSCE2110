@@ -3,39 +3,42 @@
 #include "../include/ReservationManager.h"
 using namespace std;
 
-int main()
-{
-    ResourceManager resourceManager;
-    ReservationManager reservationManager(&resourceManager);
+int main() {
 
-    bool active = true;
-    int choice = 0;
+	bool active = true;
+	int choice;
 
-    while (active)
-    {
-        // User input prompt
-        cout << "\n===== Campus Resource Reservation System =====" << endl;
-        cout << "1. View Resources" << endl;
-        cout << "2. Create Reservation" << endl;
-        cout << "3. Cancel Reservation" << endl;
-        cout << "4. View Waiting Lists" << endl;
-        cout << "5. Undo Cancellation" << endl;
-        cout << "6. Search Reservations" << endl;
-        cout << "7. Sort Resources" << endl;
-        cout << "8. Generate Report" << endl;
-        cout << "9. Exit" << endl;
-        cout << "Enter Choice: ";
-        cin >> choice;
+	// Managers
+	ResourceManager resourceManager;
+	resourceManager.loadResources("../data/resources.txt");
+	ReservationManager reservationManager(&resourceManager);
+	
+	// Unique ID
+	int currentID = 0;
 
-        // Correct invalid choices
-        while (choice < 1 || choice > 9)
-        {
-            cout << "Invalid choice, please enter 1-9: ";
-            cin >> choice;
-        }
+	while (active) {
 
-        // Switch Case for Choices
-        switch (choice)
+		// User input prompt
+		cout << "===== Campus Resource Reservation System =====" << endl;
+		cout << "\n1. View Resources" << endl;
+		cout << "2. Create Reservation" << endl;
+		cout << "3. Cancel Reservation" << endl;
+		cout << "4. View Waiting Lists" << endl;
+		cout << "5. Undo Cancellation" << endl;
+		cout << "6. Search Reservations" << endl;
+		cout << "7. Sort Resources" << endl;
+		cout << "8. Generate Report" << endl;
+		cout << "9. Exit" << endl;
+		cout << "Enter Choice: ";
+		cin >> choice;
+    
+		// Correct invalid choices
+		while (choice < 1 || choice > 9) {
+			cout << "Invalid choice, please enter 1-9: ";
+			cin >> choice;
+		}
+	
+		switch (choice)
         {
             // Handle choices: View Resources (1)
             case 1:
@@ -93,7 +96,10 @@ int main()
                 string reservationID;
                 cout << "Search by Reservation ID: ";
                 cin >> reservationID;
-                reservationManager.searchReservationByID(reservationID);
+				Reservation* res = reservationManager.searchReservationByID(reservationID);
+				if (res != nullptr) {
+					(*res).display();
+				}
                 break;
             }
 
@@ -108,9 +114,7 @@ int main()
             // Handle choices: Generate Report (8)
             case 8:
             {
-                resourceManager.generateReport();
                 reservationManager.generateReport();
-                reservationManager.displayActiveReservations();
                 break;
             }
 
@@ -127,7 +131,7 @@ int main()
                 break;
             }
         }
-    }
-
-    return 0;
+  }
+  
+  return 0;
 }

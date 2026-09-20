@@ -3,6 +3,8 @@
 
 #include "../include/Reservation.h"
 #include "../include/ResourceManager.h"
+#include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -21,6 +23,8 @@ private:
     ReservationNode* head;
 	ReservationNode* tail;
     ResourceManager* resourceManager;
+	queue<Reservation> waitlist;
+	stack<Reservation> cancellations;
 
 public:
     ReservationManager(ResourceManager* manager);
@@ -39,10 +43,15 @@ public:
         const string& date,
         const string& time
     );
+	
+	Reservation* searchReservationByID(const string& reservationID);
 
     bool cancelReservation(const string& reservationID);
+	bool undoCancellation();
 
+	void displayWaitingList() const;
     void displayActiveReservations() const;
+	void generateReport() const;
 };
 
 #endif
