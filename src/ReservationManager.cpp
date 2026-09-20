@@ -77,9 +77,9 @@ bool ReservationManager::cancelReservation(const string& reservationID) {
 		if (curr->reservation.getReservationID() == reservationID) {
 			// Clone reservation and add to cancel stack
 			Reservation res = curr->reservation;
-			//FIXME: add res to stack
+			cancellations.push(res);
 			
-			// Remove from linked list and deallocate
+			// Remove node from linked list and deallocate
 			if (prev == nullptr) {
 				head = curr->next;
 			}
@@ -97,7 +97,38 @@ bool ReservationManager::cancelReservation(const string& reservationID) {
 	
 }
 
-// Print active
+// Undo removal
+
+bool ReservationManager::undoCancellation() {
+	
+	// Create node
+	Reservation res = cancellations.top();
+	ReservationNode* newNode = new ReservationNode(*res);
+		
+	// Empty list case
+	if (head == nullptr) {
+		head = newNode;
+		tail = head;
+	}
+	
+	// Append item after tail and move tail
+	else {
+		tail->next = newNode;
+		tail = newNode;
+	}
+	
+	// Remove from cancellation stack
+	cancellations.pop();
+	
+}
+
+// Prints
+void ReservationManager::displayWaitingList() const {
+	
+	cout << "\n===== Waiting List =====" << endl;
+	
+	
+}
 
 void ReservationManager::displayActiveReservations() const {
 	

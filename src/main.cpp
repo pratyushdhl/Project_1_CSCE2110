@@ -37,64 +37,98 @@ int main() {
 			cin >> choice;
 		}
 	
-		// Handle choices: View Resources (1)
-		if (choice == 1) {
-			resourceManager.displayResourceAvailability();
-		}
-		
-		// Handle choices: Create Reservation (2)
-		if (choice == 2) {
-			string reservationID, studentID, resourceID, date, time;
-			reservationID = to_string(currentID);
-			currentID++;
-			cout << "Student ID: ";
-			cin >> studentID;
-			cout << "Resource ID: ";
-			cin >> resourceID;
-			cout << "Date: ";
-			cin >> date;
-			cout << "Time: ";
-			cin >> time;
-		
-			reservationManager.createReservation(
-				reservationID, studentID, resourceID, date, time
-			);
-		}
-		
-		// Handle choices: Cancel Reservation (3)
-		if (choice == 3) {
-			
-		}
-		
-		// Handle choices: View Waiting Lists (4)
-		if (choice == 4) {
-			
-		}
-		
-		// Handle choices: Undo Cancellation (5)
-		if (choice == 5) {
-			
-		}
-		
-		// Handle choices: Search Reservations (6)
-		if (choice == 6) {
-			
-		}
-		
-		// Handle choices: Sort Resources (7)
-		if (choice == 7) {
-			
-		}
-		
-		// Handle choices: Generate Report (8)
-		if (choice == 8) {
-			
-		}
-		
-		// Handle choices: Exit (9)
-		if (choice == 9) {
-			active = false;
-		}
+		switch (choice)
+        {
+            // Handle choices: View Resources (1)
+            case 1:
+            {
+                resourceManager.displayResources();
+                break;
+            }
+
+            // Handle choices: Create Reservation (2)
+            case 2:
+            {
+                string reservationID, studentID, studentName, resourceID, date;
+                cout << "Reservation ID: ";
+                cin >> reservationID;
+                cout << "Student ID: ";
+                cin >> studentID;
+                cout << "Student Name: ";
+                cin.ignore();
+                getline(cin, studentName);
+                cout << "Resource ID: ";
+                cin >> resourceID;
+                cout << "Date (MM/DD/YYYY): ";
+                cin >> date;
+                reservationManager.createReservation(reservationID, studentID, studentName, resourceID, date);
+                break;
+            }
+
+            // Handle choices: Cancel Reservation (3)
+            case 3:
+            {
+                string reservationID;
+                cout << "Enter reservation ID to cancel: ";
+                cin >> reservationID;
+                reservationManager.cancelReservation(reservationID);
+                break;
+            }
+
+            // Handle choices: View Waiting Lists (4)
+            case 4:
+            {
+                reservationManager.displayWaitingList();
+                break;
+            }
+
+            // Handle choices: Undo Cancellation (5)
+            case 5:
+            {
+                reservationManager.undoCancellation();
+                break;
+            }
+
+            // Handle choices: Search Reservations (6)
+            case 6:
+            {
+                string reservationID;
+                cout << "Search by Reservation ID: ";
+                cin >> reservationID;
+                reservationManager.searchReservationByID(reservationID);
+                break;
+            }
+
+            // Handle choices: Sort Resources (7)
+            case 7:
+            {
+                resourceManager.sortResourcesByName();
+                resourceManager.displayResources();
+                break;
+            }
+
+            // Handle choices: Generate Report (8)
+            case 8:
+            {
+                resourceManager.generateReport();
+                reservationManager.generateReport();
+                reservationManager.displayActiveReservations();
+                break;
+            }
+
+            // Handle choices: Exit (9)
+            case 9:
+            {
+                active = false;
+                cout << "Exiting the system..." << endl;
+                break;
+            }
+            default:
+            {
+                cout << "Invalid menu choice." << endl;
+                break;
+            }
+        }
 	
   }
   
