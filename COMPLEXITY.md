@@ -13,6 +13,14 @@ Reservation Removal: $\mathcal{O}(N)$
 
 ## 2. Queue (Waiting List Operations)
 
+Addition of Student to Waiting List (Enqueue)
+  Explanation: The addition of a student to the end of waiting list queue runs in constant matter and time $\mathcal{O}(1)$ awhile only updating the last pointer of waiting list.
+
+Processing Next Student (Dequeue)
+  Explanation: The removal of a student from front of waiting list queue runs in constant matter and time $\mathcal{O}(1)$ awhile only updating the front pointer of waiting list.
+
+## 3. Stack (Cancellation History Operation)
+
 Push (Store Canceled Reservation): $\mathcal{O}(1)$
   Explanation: The action of pushing a canceled reservation onto the lead of the stack. Constant time operation is the complex term for such action, $\mathcal{O}(1)$. 
 
