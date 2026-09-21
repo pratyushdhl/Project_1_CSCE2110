@@ -18,3 +18,4 @@ Push (Store Canceled Reservation): $\mathcal{O}(1)$
 
 
 Pop and Restore (Undo Cancelation): $\mathcal{O}(1)$
+  Explanation: The action of popping a lead element from a stack utilizes $\mathcal{O}(1)$ time. The action of re-inserting the restored reservation into thus list utilizes $\mathcal{O}(1)$ 
