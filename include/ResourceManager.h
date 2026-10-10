@@ -24,6 +24,7 @@ class ResourceManager
 
         // Display resource availability
         void displayResourceAvailability() const;
+		void displayResourceUtilization() const;
 };
 
 #endif

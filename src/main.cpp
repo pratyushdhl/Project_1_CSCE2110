@@ -43,7 +43,7 @@ int main() {
             // Handle choices: View Resources (1)
             case 1:
             {
-                resourceManager.displayResources();
+                resourceManager.displayResourceAvailability();
                 break;
             }
 
@@ -72,7 +72,13 @@ int main() {
                 string reservationID;
                 cout << "Enter reservation ID to cancel: ";
                 cin >> reservationID;
-                reservationManager.cancelReservation(reservationID);
+                bool status = reservationManager.cancelReservation(reservationID);
+				if (status) {
+					cout << "Reservation successfully cancelled." << endl;
+				}
+				else {
+					cout << "Failed to cancel reservation." << endl;
+				}
                 break;
             }
 
@@ -100,6 +106,9 @@ int main() {
 				if (res != nullptr) {
 					(*res).display();
 				}
+				else {
+					cout << "No reservation found with ID " << reservationID << endl;
+				}
                 break;
             }
 
@@ -107,7 +116,7 @@ int main() {
             case 7:
             {
                 resourceManager.sortResourcesByName();
-                resourceManager.displayResources();
+                cout << "Resources sorted successfully." << endl;
                 break;
             }
 

@@ -5,8 +5,8 @@ using namespace std;
 
 // ReservationNode Constructor
 
-ReservationNode::ReservationNode(Reservation r) {
-	this->reservation = reservation;
+ReservationNode::ReservationNode(Reservation* r) {
+	this->reservation = r;
 	next = nullptr;
 }
 
@@ -50,8 +50,8 @@ bool ReservationManager::createReservation(
         time
 	);
 	
-	ReservationNode* newNode = new ReservationNode(*res);
-		
+	ReservationNode* newNode = new ReservationNode(res);
+	
 	// Empty list case
 	if (head == nullptr) {
 		head = newNode;
@@ -74,9 +74,9 @@ Reservation* ReservationManager::searchReservationByID(const string& reservation
 	ReservationNode* curr = head;
 	
 	while (curr != nullptr) {
-		if (curr->reservation.getReservationID() == reservationID) {
-			// Clone reservation and add to cancel stack
-			return &(curr->reservation);
+		if (curr->reservation->getReservationID() == reservationID) {
+			//
+			return (curr->reservation);
 		}
 		curr = curr->next;
 	}
@@ -94,9 +94,10 @@ bool ReservationManager::cancelReservation(const string& reservationID) {
 	ReservationNode* prev = nullptr;
 	
 	while (curr != nullptr) {
-		if (curr->reservation.getReservationID() == reservationID) {
-			// Clone reservation and add to cancel stack
-			Reservation res = curr->reservation;
+		if (curr->reservation->getReservationID() == reservationID) {
+			
+			// Add res to cancel stack
+			Reservation* res = curr->reservation;
 			cancellations.push(res);
 			
 			// Remove node from linked list and deallocate
@@ -122,7 +123,7 @@ bool ReservationManager::cancelReservation(const string& reservationID) {
 bool ReservationManager::undoCancellation() {
 	
 	// Create node
-	Reservation res = cancellations.top();
+	Reservation* res = cancellations.top();
 	ReservationNode* newNode = new ReservationNode(res);
 		
 	// Empty list case
@@ -156,7 +157,7 @@ void ReservationManager::displayActiveReservations() const {
 	ReservationNode* curr = head;
 	
 	while (curr != nullptr) {
-		curr->reservation.display();
+		curr->reservation->display();
 		curr = curr->next;
 	}
 	
@@ -164,6 +165,11 @@ void ReservationManager::displayActiveReservations() const {
 
 void ReservationManager::generateReport() const {
 	
-	cout << "Placeholder for report" << endl;
+	cout << "===== System Report =====" << endl;
+	cout << "\n-Active Reservations-\n" << endl;
+	displayActiveReservations();
+	cout << "\n-Resource Utilization-\n" << endl;
+	resourceManager->displayResourceUtilization();
+	cout << endl;
 	
 }
