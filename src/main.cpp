@@ -92,7 +92,13 @@ int main() {
             // Handle choices: Undo Cancellation (5)
             case 5:
             {
-                reservationManager.undoCancellation();
+                Reservation* res = reservationManager.undoCancellation();
+				if (res != nullptr) {
+					cout << "Reservation with ID " << res->getReservationID() << " restored successfully." << endl;
+				}
+				else {
+					cout << "No cancellation to undo." << endl;
+				}
                 break;
             }
 

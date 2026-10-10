@@ -47,7 +47,7 @@ public:
 	Reservation* searchReservationByID(const string& reservationID);
 
     bool cancelReservation(const string& reservationID);
-	bool undoCancellation();
+	Reservation* undoCancellation();
 
 	void displayWaitingList() const;
     void displayActiveReservations() const;

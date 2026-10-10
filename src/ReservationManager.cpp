@@ -118,28 +118,33 @@ bool ReservationManager::cancelReservation(const string& reservationID) {
 	
 }
 
-// Undo removal
+// Undo removal, return restored reservation
 
-bool ReservationManager::undoCancellation() {
+Reservation* ReservationManager::undoCancellation() {
 	
-	// Create node
-	Reservation* res = cancellations.top();
-	ReservationNode* newNode = new ReservationNode(res);
+	// Ensure a cancellation exists to undo
+	if (!cancellations.empty()) {
+		// Create node
+		Reservation* res = cancellations.top();
+		ReservationNode* newNode = new ReservationNode(res);
+			
+		// Empty list case
+		if (head == nullptr) {
+			head = newNode;
+			tail = head;
+		}
 		
-	// Empty list case
-	if (head == nullptr) {
-		head = newNode;
-		tail = head;
+		// Append item after tail and move tail
+		else {
+			tail->next = newNode;
+			tail = newNode;
+		}
+		
+		// Remove from cancellation stack
+		cancellations.pop();
+		return res;
 	}
-	
-	// Append item after tail and move tail
-	else {
-		tail->next = newNode;
-		tail = newNode;
-	}
-	
-	// Remove from cancellation stack
-	cancellations.pop();
+	return nullptr;
 	
 }
 
