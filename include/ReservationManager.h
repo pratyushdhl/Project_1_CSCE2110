@@ -11,10 +11,10 @@ using namespace std;
 class ReservationNode
 {
     public:
-        Reservation reservation;
+        Reservation* reservation;
         ReservationNode* next;
 
-        ReservationNode(Reservation r);
+        ReservationNode(Reservation* r);
 };
 
 class ReservationManager
@@ -23,8 +23,8 @@ private:
     ReservationNode* head;
 	ReservationNode* tail;
     ResourceManager* resourceManager;
-	queue<Reservation> waitlist;
-	stack<Reservation> cancellations;
+	queue<Reservation*> waitlist;
+	stack<Reservation*> cancellations;
 
 public:
     ReservationManager(ResourceManager* manager);

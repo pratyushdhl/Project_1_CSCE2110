@@ -132,3 +132,32 @@ void ResourceManager::displayResourceAvailability() const
 	}
 	cout << endl;
 }
+
+void ResourceManager::displayResourceUtilization() const 
+{
+	// Table header
+	cout << setw(5) << left << "ID";
+	cout << "|" << setw(25) << "Name";
+	cout << "|Type" << endl;
+	cout << string(5, '-') << '+';
+	cout << string(25, '-') << '+';
+	cout << string(25, '-') << endl;
+	
+	// Table contents
+	int used = 0, unused = 0;
+	for (const Resource& resource : resources) {
+		if (!resource.isAvailable()) {
+			used++;
+			cout << setw(5) << resource.getResourceID();
+			cout << "|" << setw(25) << resource.getResourceName();
+			cout << "|" << setw(25) << resource.getResourceType() << endl;
+		}
+		else {
+			unused++;
+		}
+	}
+	
+	// Usage
+	cout << "Total resource utilization: " << used << "/" << used+unused << endl;
+	
+}
