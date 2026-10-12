@@ -18,6 +18,9 @@ class ResourceManager
 
 		// Sort resources by name
 		void sortResourcesByName();
+		
+		// Get resource by ID
+		Resource* getResource(const string& id);
 
         //Display all resources
         void displayResources() const;
