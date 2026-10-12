@@ -56,32 +56,25 @@ bool ResourceManager::loadResources(const string& filename)
     file.close();
 }
 
+Resource* ResourceManager::getResource(const string& id) {
+	
+	for (int i = 0; i < resources.size(); i++) {
+		cout << resources.at(i).getResourceID() << endl;
+		cout << id << endl;
+		if (resources.at(i).getResourceID() == id) {
+			return &resources.at(i);
+		}
+	}
+	return nullptr;
+	
+}
+
 void ResourceManager::sortResourcesByName() {
 	
 	if (resources.empty()) {
 		cout << "No resources to sort." << endl;
 	}
 	else {
-		/* SWITCHING TO BUBBLE SORT FOR SIMPLICITY
-		// Quick sort by resource name
-		Resource& pivot = resources.back();
-		int i = -1;
-		for (int j = 0; j < resources.size() - 2; j++) {
-			// Compare jth and pivot
-			if (resources[j].getResourceName() < pivot.getResourceName()) {
-				i++;
-				if (i != j) {
-					// Swap ith and jth
-					Resource temp = resources[j];
-					resources[j] = resources[i];
-					resources[i] = temp;
-				}
-			}
-		}
-		// Move pivot to i+1
-		resources.insert(resources.begin() + i+1, resources.back());
-		resources.pop_back();
-		*/
 		bool sorted = false;
 		while (!sorted) {
 			sorted = true;

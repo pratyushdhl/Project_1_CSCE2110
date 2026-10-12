@@ -62,7 +62,7 @@ int main() {
                 cin >> resourceID;
                 cout << "Date (MM/DD/YYYY): ";
                 cin >> date;
-                reservationManager.createReservation(reservationID, studentID, studentName, resourceID, date);
+                reservationManager.createReservation(reservationID, studentID, resourceID, studentName, date);
                 break;
             }
 

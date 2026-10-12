@@ -50,19 +50,43 @@ bool ReservationManager::createReservation(
         time
 	);
 	
-	ReservationNode* newNode = new ReservationNode(res);
+	// Check if resource available
+	Resource* reso = resourceManager->getResource(resourceID);
+	if (reso != nullptr) {
+		if (!reso->isAvailable()) {
+			// Waitlist
+			waitlist.push(res);
+			cout << "Resource unavailable. Adding to waitlist." << endl;
+			return true;
+		}
+		else {
+			reso->setAvailability(false);
+			
+			// Create
+			ReservationNode* newNode = new ReservationNode(res);
 	
-	// Empty list case
-	if (head == nullptr) {
-		head = newNode;
-		tail = head;
+			// Empty list case
+			if (head == nullptr) {
+				head = newNode;
+				tail = head;
+			}
+			
+			// Append item after tail and move tail
+			else {
+				tail->next = newNode;
+				tail = newNode;
+			}
+			cout << "Reservation created successfully." << endl;
+			return true;
+		}
 	}
-	
-	// Append item after tail and move tail
 	else {
-		tail->next = newNode;
-		tail = newNode;
+		// Resource doesn't exist
+		cout << "Resource ID doesn't correspond to a valid resource." << endl;
+		return false;
 	}
+	
+	
 	
 }
 
@@ -152,7 +176,12 @@ Reservation* ReservationManager::undoCancellation() {
 void ReservationManager::displayWaitingList() const {
 	
 	cout << "\n===== Waiting List =====" << endl;
-	
+	queue<Reservation*> wlCopy = waitlist;
+	for (int i = 0; i <= wlCopy.size(); i++) {
+		cout << i << endl;
+		wlCopy.front()->display();
+		wlCopy.pop();
+	}
 	
 }
 
@@ -175,6 +204,8 @@ void ReservationManager::generateReport() const {
 	displayActiveReservations();
 	cout << "\n-Resource Utilization-\n" << endl;
 	resourceManager->displayResourceUtilization();
+	cout << "\n-Waiting list status-\n" << endl;
+	cout << "# in queue: " << waitlist.size() << endl;
 	cout << endl;
 	
 }
